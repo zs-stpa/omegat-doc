@@ -1,0 +1,33 @@
+name: release
+
+# A pushed tag v* builds the deck and attaches the self-contained HTML file
+# to a GitHub release of that tag.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - name: build
+        run: python make_deck.py "$GITHUB_REF_NAME"
+      - name: release
+        env:
+          TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          FILE="dist/OmegaT-Beitraege-Sommer-2026-$GITHUB_REF_NAME.html"
+          API="https://api.github.com/repos/$GITHUB_REPOSITORY"
+          AUTH=(-H "Authorization: Bearer $TOKEN" -H "Accept: application/vnd.github+json")
+          REL=$(jq -n --arg t "$GITHUB_REF_NAME" '{tag_name: $t, name: $t, draft: true}' \
+            | curl -fsS "${AUTH[@]}" -X POST "$API/releases" -d @-)
+          ID=$(echo "$REL" | jq -r .id)
+          curl -fsS "${AUTH[@]}" -H "Content-Type: text/html" --data-binary @"$FILE" \
+            "https://uploads.github.com/repos/$GITHUB_REPOSITORY/releases/$ID/assets?name=$(basename "$FILE")" > /dev/null
+          curl -fsS "${AUTH[@]}" -X PATCH "$API/releases/$ID" -d '{"draft": false}' > /dev/null

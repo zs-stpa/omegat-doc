@@ -1,0 +1,935 @@
+[
+ {
+  "language": "af",
+  "name": "Afrikaans",
+  "license": "GPL-2.0 / LGPL / BSD-3-Clause / Public-Domain",
+  "version": "2026.10.12",
+  "collection": "LibreOffice",
+  "jar_bytes": 415748,
+  "pairs": [
+   {
+    "stem": "af_ZA",
+    "codes": [
+     "af_NA"
+    ],
+    "entries": 100693,
+    "declared": 100693,
+    "forms": 148997,
+    "forms_complete": true,
+    "dic_bytes": 1214886,
+    "aff_bytes": 4969
+   }
+  ],
+  "locales": [
+   "af-ZA",
+   "af-NA"
+  ]
+ },
+ {
+  "language": "bg",
+  "name": "Bulgarian",
+  "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1",
+  "version": "2024.09.09",
+  "collection": "wooorm",
+  "jar_bytes": 300572,
+  "pairs": [
+   {
+    "stem": "bg",
+    "codes": [],
+    "entries": 78233,
+    "declared": 78233,
+    "forms": 892484,
+    "forms_complete": true,
+    "dic_bytes": 1566242,
+    "aff_bytes": 58189
+   }
+  ],
+  "locales": [
+   "bg"
+  ]
+ },
+ {
+  "language": "bo",
+  "name": "Tibetan",
+  "license": "CC0-1.0",
+  "version": "2026.10.12",
+  "collection": "LibreOffice",
+  "jar_bytes": 4514,
+  "pairs": [
+   {
+    "stem": "bo_CN",
+    "codes": [
+     "bo",
+     "bo_IN"
+    ],
+    "entries": 378,
+    "declared": 378,
+    "forms": 2470,
+    "forms_complete": true,
+    "dic_bytes": 4637,
+    "aff_bytes": 1706
+   }
+  ],
+  "locales": [
+   "bo-CN",
+   "bo",
+   "bo-IN"
+  ]
+ },
+ {
+  "language": "ckb",
+  "name": "Central Kurdish",
+  "license": "CC-BY-SA-4.0",
+  "version": "2026.10.12",
+  "collection": "LibreOffice",
+  "jar_bytes": 125965,
+  "pairs": [
+   {
+    "stem": "ckb_IR",
+    "codes": [
+     "ckb_IQ"
+    ],
+    "entries": 23252,
+    "declared": 23255,
+    "forms": 116813549,
+    "forms_complete": true,
+    "dic_bytes": 713461,
+    "aff_bytes": 124646
+   }
+  ],
+  "locales": [
+   "ckb-IR",
+   "ckb-IQ"
+  ]
+ },
+ {
+  "language": "cs",
+  "name": "Czech",
+  "license": "GPL-2.0",
+  "version": "2024.09.09",
+  "collection": "wooorm",
+  "jar_bytes": 925840,
+  "pairs": [
+   {
+    "stem": "cs",
+    "codes": [],
+    "entries": 260460,
+    "declared": 260460,
+    "forms": 4271702,
+    "forms_complete": true,
+    "dic_bytes": 3648133,
+    "aff_bytes": 112714
+   }
+  ],
+  "locales": [
+   "cs"
+  ]
+ },
+ {
+  "language": "cy",
+  "name": "Welsh",
+  "license": "LGPL-3.0",
+  "version": "2024.09.09",
+  "collection": "wooorm",
+  "jar_bytes": 247615,
+  "pairs": [
+   {
+    "stem": "cy",
+    "codes": [],
+    "entries": 71924,
+    "declared": 72081,
+    "forms": 693449,
+    "forms_complete": true,
+    "dic_bytes": 888650,
+    "aff_bytes": 7489
+   }
+  ],
+  "locales": [
+   "cy"
+  ]
+ },
+ {
+  "language": "et",
+  "name": "Estonian",
+  "license": "GPL-2.0 / LGPL",
+  "version": "2026.10.12",
+  "collection": "LibreOffice",
+  "jar_bytes": 884546,
+  "pairs": [
+   {
+    "stem": "et_EE",
+    "codes": [],
+    "entries": 282173,
+    "declared": 282173,
+    "forms": 15359551,
+    "forms_complete": true,
+    "dic_bytes": 4457441,
+    "aff_bytes": 240016
+   }
+  ],
+  "locales": [
+   "et-EE"
+  ]
+ },
+ {
+  "language": "fo",
+  "name": "Faroese",
+  "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1",
+  "version": "2024.09.09",
+  "collection": "wooorm",
+  "jar_bytes": 582153,
+  "pairs": [
+   {
+    "stem": "fo",
+    "codes": [],
+    "entries": 121832,
+    "declared": 121832,
+    "forms": 55992544,
+    "forms_complete": true,
+    "dic_bytes": 1716098,
+    "aff_bytes": 170212
+   }
+  ],
+  "locales": [
+   "fo"
+  ]
+ },
+ {
+  "language": "fur",
+  "name": "Friulian",
+  "license": "GPL-2.0",
+  "version": "2024.09.09",
+  "collection": "wooorm",
+  "jar_bytes": 129007,
+  "pairs": [
+   {
+    "stem": "fur",
+    "codes": [],
+    "entries": 36320,
+    "declared": 36320,
+    "forms": 396887,
+    "forms_complete": true,
+    "dic_bytes": 384726,
+    "aff_bytes": 17831
+   }
+  ],
+  "locales": [
+   "fur"
+  ]
+ },
+ {
+  "language": "fy",
+  "name": "Western Frisian",
+  "license": "GPL-3.0",
+  "version": "2024.09.09",
+  "collection": "wooorm",
+  "jar_bytes": 1742705,
+  "pairs": [
+   {
+    "stem": "fy",
+    "codes": [],
+    "entries": 299498,
+    "declared": 299498,
+    "forms": 317521,
+    "forms_complete": true,
+    "dic_bytes": 3611970,
+    "aff_bytes": 7020461
+   }
+  ],
+  "locales": [
+   "fy"
+  ]
+ },
+ {
+  "language": "gd",
+  "name": "Scottish Gaelic",
+  "license": "GPL-3.0 / AGPL-3.0 / LGPL",
+  "version": "2026.10.12",
+  "collection": "LibreOffice",
+  "jar_bytes": 1028055,
+  "pairs": [
+   {
+    "stem": "gd_GB",
+    "codes": [],
+    "entries": 331834,
+    "declared": 331834,
+    "forms": 1823079,
+    "forms_complete": true,
+    "dic_bytes": 4806682,
+    "aff_bytes": 8223
+   }
+  ],
+  "locales": [
+   "gd-GB"
+  ]
+ },
+ {
+  "language": "hr",
+  "name": "Croatian",
+  "license": "LGPL-2.1 / SISSL",
+  "version": "2024.09.09",
+  "collection": "wooorm",
+  "jar_bytes": 228047,
+  "pairs": [
+   {
+    "stem": "hr",
+    "codes": [],
+    "entries": 53710,
+    "declared": 53711,
+    "forms": null,
+    "forms_complete": true,
+    "dic_bytes": 732589,
+    "aff_bytes": 95475
+   }
+  ],
+  "locales": [
+   "hr"
+  ]
+ },
+ {
+  "language": "hu",
+  "name": "Hungarian",
+  "license": "LGPL-3.0 / GPL-3.0 / MPL-2.0",
+  "version": "2026.10.12",
+  "collection": "LibreOffice",
+  "jar_bytes": 861230,
+  "pairs": [
+   {
+    "stem": "hu_HU",
+    "codes": [],
+    "entries": 97581,
+    "declared": 97663,
+    "forms": null,
+    "forms_complete": true,
+    "dic_bytes": 1786144,
+    "aff_bytes": 2316267
+   }
+  ],
+  "locales": [
+   "hu-HU"
+  ]
+ },
+ {
+  "language": "hy",
+  "name": "Armenian",
+  "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1",
+  "version": "2024.09.09",
+  "collection": "wooorm",
+  "jar_bytes": 308819,
+  "pairs": [
+   {
+    "stem": "hy",
+    "codes": [],
+    "entries": 67875,
+    "declared": 67875,
+    "forms": null,
+    "forms_complete": true,
+    "dic_bytes": 2210855,
+    "aff_bytes": 25461
+   }
+  ],
+  "locales": [
+   "hy"
+  ]
+ },
+ {
+  "language": "hyw",
+  "name": "Western Armenian",
+  "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1",
+  "version": "2024.09.09",
+  "collection": "wooorm",
+  "jar_bytes": 316188,
+  "pairs": [
+   {
+    "stem": "hyw",
+    "codes": [],
+    "entries": 68595,
+    "declared": 68594,
+    "forms": null,
+    "forms_complete": true,
+    "dic_bytes": 2068288,
+    "aff_bytes": 96823
+   }
+  ],
+  "locales": [
+   "hyw"
+  ]
+ },
+ {
+  "language": "ia",
+  "name": "Interlingua",
+  "license": "GPL-3.0",
+  "version": "2024.09.09",
+  "collection": "wooorm",
+  "jar_bytes": 220187,
+  "pairs": [
+   {
+    "stem": "ia",
+    "codes": [],
+    "entries": 51601,
+    "declared": 51603,
+    "forms": 334892,
+    "forms_complete": true,
+    "dic_bytes": 713481,
+    "aff_bytes": 34023
+   }
+  ],
+  "locales": [
+   "ia"
+  ]
+ },
+ {
+  "language": "id",
+  "name": "Indonesian",
+  "license": "LGPL-3.0 / GPL-3.0 / BSD-3-Clause",
+  "version": "2026.10.12",
+  "collection": "LibreOffice",
+  "jar_bytes": 179183,
+  "pairs": [
+   {
+    "stem": "id_ID",
+    "codes": [],
+    "entries": 46905,
+    "declared": 46905,
+    "forms": 8142965,
+    "forms_complete": true,
+    "dic_bytes": 453700,
+    "aff_bytes": 12759
+   }
+  ],
+  "locales": [
+   "id-ID"
+  ]
+ },
+ {
+  "language": "ie",
+  "name": "Interlingue",
+  "license": "Apache-2.0",
+  "version": "2024.09.09",
+  "collection": "wooorm",
+  "jar_bytes": 99112,
+  "pairs": [
+   {
+    "stem": "ie",
+    "codes": [],
+    "entries": 23596,
+    "declared": 23596,
+    "forms": 85016,
+    "forms_complete": true,
+    "dic_bytes": 252917,
+    "aff_bytes": 5686
+   }
+  ],
+  "locales": [
+   "ie"
+  ]
+ },
+ {
+  "language": "ka",
+  "name": "Georgian",
+  "license": "MIT",
+  "version": "2024.09.09",
+  "collection": "wooorm",
+  "jar_bytes": 557659,
+  "pairs": [
+   {
+    "stem": "ka",
+    "codes": [],
+    "entries": 143075,
+    "declared": 143020,
+    "forms": 1189710,
+    "forms_complete": true,
+    "dic_bytes": 3884577,
+    "aff_bytes": 63577
+   }
+  ],
+  "locales": [
+   "ka"
+  ]
+ },
+ {
+  "language": "ko",
+  "name": "Korean",
+  "license": "GPL-3.0",
+  "version": "2026.10.12",
+  "collection": "LibreOffice",
+  "jar_bytes": 879882,
+  "pairs": [
+   {
+    "stem": "ko_KR",
+    "codes": [],
+    "entries": 101598,
+    "declared": 101598,
+    "forms": null,
+    "forms_complete": true,
+    "dic_bytes": 2864525,
+    "aff_bytes": 11094418
+   }
+  ],
+  "locales": [
+   "ko-KR"
+  ]
+ },
+ {
+  "language": "la",
+  "name": "Latin",
+  "license": "GPL-2.0",
+  "version": "2024.09.09",
+  "collection": "wooorm",
+  "jar_bytes": 512425,
+  "pairs": [
+   {
+    "stem": "la",
+    "codes": [],
+    "entries": 136250,
+    "declared": 136255,
+    "forms": 21580825,
+    "forms_complete": true,
+    "dic_bytes": 1710582,
+    "aff_bytes": 441477
+   }
+  ],
+  "locales": [
+   "la"
+  ]
+ },
+ {
+  "language": "lij",
+  "name": "Ligurian",
+  "license": "MIT",
+  "version": "2026.10.12",
+  "collection": "LibreOffice",
+  "jar_bytes": 135021,
+  "pairs": [
+   {
+    "stem": "lij",
+    "codes": [
+     "lij_IT"
+    ],
+    "entries": 39744,
+    "declared": 39744,
+    "forms": 1085314,
+    "forms_complete": true,
+    "dic_bytes": 535959,
+    "aff_bytes": 29638
+   }
+  ],
+  "locales": [
+   "lij",
+   "lij-IT"
+  ]
+ },
+ {
+  "language": "lo",
+  "name": "Lao",
+  "license": "LGPL",
+  "version": "2026.10.12",
+  "collection": "LibreOffice",
+  "jar_bytes": 136958,
+  "pairs": [
+   {
+    "stem": "lo_LA",
+    "codes": [],
+    "entries": 30549,
+    "declared": 30549,
+    "forms": 30549,
+    "forms_complete": true,
+    "dic_bytes": 671496,
+    "aff_bytes": 10
+   }
+  ],
+  "locales": [
+   "lo-LA"
+  ]
+ },
+ {
+  "language": "lt",
+  "name": "Lithuanian",
+  "license": "BSD-3-Clause",
+  "version": "2026.10.12",
+  "collection": "LibreOffice",
+  "jar_bytes": 331551,
+  "pairs": [
+   {
+    "stem": "lt_LT",
+    "codes": [],
+    "entries": 85792,
+    "declared": 85792,
+    "forms": 37084552,
+    "forms_complete": true,
+    "dic_bytes": 1181184,
+    "aff_bytes": 99714
+   }
+  ],
+  "locales": [
+   "lt-LT"
+  ]
+ },
+ {
+  "language": "ltg",
+  "name": "Latgalian",
+  "license": "LGPL-2.1",
+  "version": "2024.09.09",
+  "collection": "wooorm",
+  "jar_bytes": 77035,
+  "pairs": [
+   {
+    "stem": "ltg",
+    "codes": [],
+    "entries": 8459,
+    "declared": 8459,
+    "forms": 497472,
+    "forms_complete": true,
+    "dic_bytes": 134293,
+    "aff_bytes": 210162
+   }
+  ],
+  "locales": [
+   "ltg"
+  ]
+ },
+ {
+  "language": "lv",
+  "name": "Latvian",
+  "license": "LGPL / GPL-2.0",
+  "version": "2026.10.12",
+  "collection": "LibreOffice",
+  "jar_bytes": 369575,
+  "pairs": [
+   {
+    "stem": "lv_LV",
+    "codes": [],
+    "entries": 66606,
+    "declared": 66606,
+    "forms": 2727701,
+    "forms_complete": true,
+    "dic_bytes": 1844831,
+    "aff_bytes": 130475
+   }
+  ],
+  "locales": [
+   "lv-LV"
+  ]
+ },
+ {
+  "language": "mk",
+  "name": "Macedonian",
+  "license": "GPL-3.0",
+  "version": "2024.09.09",
+  "collection": "wooorm",
+  "jar_bytes": 667807,
+  "pairs": [
+   {
+    "stem": "mk",
+    "codes": [],
+    "entries": 65597,
+    "declared": 65597,
+    "forms": 5068622,
+    "forms_complete": true,
+    "dic_bytes": 2279845,
+    "aff_bytes": 181552
+   }
+  ],
+  "locales": [
+   "mk"
+  ]
+ },
+ {
+  "language": "nb",
+  "name": "Norwegian Bokmål",
+  "license": "LGPL-2.0 / GPL-2.0 / CC-BY-4.0",
+  "version": "2026.10.12",
+  "collection": "LibreOffice",
+  "jar_bytes": 2000944,
+  "pairs": [
+   {
+    "stem": "nb_NO",
+    "codes": [],
+    "entries": 708615,
+    "declared": 708615,
+    "forms": null,
+    "forms_complete": true,
+    "dic_bytes": 9336265,
+    "aff_bytes": 17380
+   }
+  ],
+  "locales": [
+   "nb-NO"
+  ]
+ },
+ {
+  "language": "nds",
+  "name": "Low German",
+  "license": "GPL-3.0",
+  "version": "2024.09.09",
+  "collection": "wooorm",
+  "jar_bytes": 47292,
+  "pairs": [
+   {
+    "stem": "nds",
+    "codes": [],
+    "entries": 9543,
+    "declared": 9543,
+    "forms": 35151,
+    "forms_complete": true,
+    "dic_bytes": 103126,
+    "aff_bytes": 12733
+   }
+  ],
+  "locales": [
+   "nds"
+  ]
+ },
+ {
+  "language": "ne",
+  "name": "Nepali",
+  "license": "LGPL-2.1",
+  "version": "2024.09.09",
+  "collection": "wooorm",
+  "jar_bytes": 175244,
+  "pairs": [
+   {
+    "stem": "ne",
+    "codes": [],
+    "entries": 36847,
+    "declared": 36827,
+    "forms": 15892521,
+    "forms_complete": true,
+    "dic_bytes": 876712,
+    "aff_bytes": 69403
+   }
+  ],
+  "locales": [
+   "ne"
+  ]
+ },
+ {
+  "language": "nn",
+  "name": "Norwegian Nynorsk",
+  "license": "LGPL-2.0 / GPL-2.0 / CC-BY-4.0",
+  "version": "2026.10.12",
+  "collection": "LibreOffice",
+  "jar_bytes": 1553215,
+  "pairs": [
+   {
+    "stem": "nn_NO",
+    "codes": [],
+    "entries": 540664,
+    "declared": 540664,
+    "forms": null,
+    "forms_complete": true,
+    "dic_bytes": 6467674,
+    "aff_bytes": 13614
+   }
+  ],
+  "locales": [
+   "nn-NO"
+  ]
+ },
+ {
+  "language": "oc",
+  "name": "Occitan",
+  "license": "GPL-2.0",
+  "version": "2024.09.09",
+  "collection": "wooorm",
+  "jar_bytes": 624567,
+  "pairs": [
+   {
+    "stem": "oc",
+    "codes": [],
+    "entries": 87286,
+    "declared": 87286,
+    "forms": 1926089,
+    "forms_complete": true,
+    "dic_bytes": 2767078,
+    "aff_bytes": 19559
+   }
+  ],
+  "locales": [
+   "oc"
+  ]
+ },
+ {
+  "language": "si",
+  "name": "Sinhala",
+  "license": "GPL-3.0",
+  "version": "2026.10.12",
+  "collection": "LibreOffice",
+  "jar_bytes": 290493,
+  "pairs": [
+   {
+    "stem": "si_LK",
+    "codes": [],
+    "entries": 30319,
+    "declared": 30319,
+    "forms": 1565066,
+    "forms_complete": true,
+    "dic_bytes": 851377,
+    "aff_bytes": 197175
+   }
+  ],
+  "locales": [
+   "si-LK"
+  ]
+ },
+ {
+  "language": "sr",
+  "name": "Serbian",
+  "license": "GPL-2.0 / LGPL-2.1 / MPL-1.1 / CC-BY-SA-3.0",
+  "version": "2024.09.09",
+  "collection": "wooorm",
+  "jar_bytes": 1440009,
+  "pairs": [
+   {
+    "stem": "sr",
+    "codes": [],
+    "entries": 263909,
+    "declared": 263909,
+    "forms": 263909,
+    "forms_complete": true,
+    "dic_bytes": 4447970,
+    "aff_bytes": 1295
+   },
+   {
+    "stem": "sr_Latn",
+    "codes": [],
+    "entries": 263909,
+    "declared": 263909,
+    "forms": 263909,
+    "forms_complete": true,
+    "dic_bytes": 2489827,
+    "aff_bytes": 704
+   }
+  ],
+  "locales": [
+   "sr",
+   "sr-Latn"
+  ]
+ },
+ {
+  "language": "sw",
+  "name": "Swahili",
+  "license": "LGPL",
+  "version": "2026.10.12",
+  "collection": "LibreOffice",
+  "jar_bytes": 228986,
+  "pairs": [
+   {
+    "stem": "sw_TZ",
+    "codes": [],
+    "entries": 67900,
+    "declared": 67900,
+    "forms": 67988,
+    "forms_complete": true,
+    "dic_bytes": 630844,
+    "aff_bytes": 969
+   }
+  ],
+  "locales": [
+   "sw-TZ"
+  ]
+ },
+ {
+  "language": "th",
+  "name": "Thai",
+  "license": "LGPL",
+  "version": "2026.10.12",
+  "collection": "LibreOffice",
+  "jar_bytes": 256166,
+  "pairs": [
+   {
+    "stem": "th_TH",
+    "codes": [],
+    "entries": 50446,
+    "declared": 50446,
+    "forms": 50450,
+    "forms_complete": true,
+    "dic_bytes": 1239954,
+    "aff_bytes": 1555
+   }
+  ],
+  "locales": [
+   "th-TH"
+  ]
+ },
+ {
+  "language": "tk",
+  "name": "Turkmen",
+  "license": "Apache-2.0",
+  "version": "2024.09.09",
+  "collection": "wooorm",
+  "jar_bytes": 295262,
+  "pairs": [
+   {
+    "stem": "tk",
+    "codes": [],
+    "entries": 61912,
+    "declared": 61974,
+    "forms": 4716838,
+    "forms_complete": true,
+    "dic_bytes": 784836,
+    "aff_bytes": 369118
+   }
+  ],
+  "locales": [
+   "tk"
+  ]
+ },
+ {
+  "language": "tlh",
+  "name": "Klingon",
+  "license": "Apache-2.0",
+  "version": "2024.09.09",
+  "collection": "wooorm",
+  "jar_bytes": 50250,
+  "pairs": [
+   {
+    "stem": "tlh",
+    "codes": [],
+    "entries": 4591,
+    "declared": 4591,
+    "forms": 1833929,
+    "forms_complete": true,
+    "dic_bytes": 93976,
+    "aff_bytes": 2242
+   },
+   {
+    "stem": "tlh_Latn",
+    "codes": [],
+    "entries": 4591,
+    "declared": 4591,
+    "forms": 1833929,
+    "forms_complete": true,
+    "dic_bytes": 44710,
+    "aff_bytes": 1774
+   }
+  ],
+  "locales": [
+   "tlh",
+   "tlh-Latn"
+  ]
+ },
+ {
+  "language": "tr",
+  "name": "Turkish",
+  "license": "MIT",
+  "version": "2024.09.09",
+  "collection": "wooorm",
+  "jar_bytes": 2288911,
+  "pairs": [
+   {
+    "stem": "tr",
+    "codes": [],
+    "entries": 371056,
+    "declared": 371056,
+    "forms": 18412734,
+    "forms_complete": true,
+    "dic_bytes": 9117192,
+    "aff_bytes": 240813
+   }
+  ],
+  "locales": [
+   "tr"
+  ]
+ }
+]
