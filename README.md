@@ -16,5 +16,7 @@ Build it yourself (Python 3 standard library only):
 - `make_deck.py`: layout and rendering (SVG per slide, one HTML file)
 - `assets/`: images (SVG, lossless WebP), clips (H.264, silent), language pack figures
 - `tools/`: how the assets were prepared from the original recordings and screenshots
+  - `render_numerals.py`: glyph images of slide 6 (free Noto fonts, InupiaqNumbers for Kaktovik; fetched into `.fonts-cache/`)
+  - `check_numerals.py`: confirms OmegaT's numeral parser reads every sample of slide 6 as claimed (`OMEGAT_HOME=… python3 tools/check_numerals.py`)
 
 A pushed tag `v*` builds the deck and publishes it as a release.

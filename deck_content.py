@@ -51,7 +51,7 @@ def I(de, eo, en, dde="", deo="", den="", st="mr"):
 BLUE_C, VERM_C, INK_C, SLATE_C = "#0072B2", "#a84300", "#1e282c", "#3d4a52"
 SLATE = SLATE_C
 
-AS_OF = L("Stand 25.11.2026", "stato 2026-11-25", "as of 2026-11-25")
+AS_OF = L("Stand 26.11.2026", "stato 2026-11-26", "as of 2026-11-26")
 FOOTER = L("St. Pakebusch · Co-Autor: Claude Opus 5.5 · Beiträge zu Ωt seit Sommer 2026",
            "St. Pakebusch · kunaŭtoro: Claude Opus 5.5 · Kontribuoj al Ωt ekde somero 2026",
            "St. Pakebusch · co-author: Claude Opus 5.5 · Contributions to Ωt since summer 2026")
@@ -361,7 +361,174 @@ BLOCKS = [
         "abgeschlossen", "finita", "completed", "up")]),
 ]
 
+# "2345" in many scripts for slide 6: (asset key, text, name, explanation, font).
+# Every entry is read back as 2345 by OmegaT's NumeralValueParser (tools/check_numerals.jsh);
+# fonts: tools/render_numerals.py.
+
+
+def digits(zero, n=2345, base=10):
+    out = ""
+    while n:
+        out = chr(zero + n % base) + out
+        n //= base
+    return out
+
+
+D10 = L("Stellenwert, Basis 10", "pozicia, bazo 10", "positional, base 10")
+B20 = L("Stellenwert, Basis 20: 5·400 + 17·20 + 5", "pozicia, bazo 20: 5·400 + 17·20 + 5", "positional, base 20: 5·400 + 17·20 + 5")
+ADD = L("additiv: 2000 + 300 + 40 + 5", "aldona: 2000 + 300 + 40 + 5", "additive: 2000 + 300 + 40 + 5")
+MUL = L("multiplikativ: 2·1000 + 3·100 + 4·10 + 5", "multiplika: 2·1000 + 3·100 + 4·10 + 5", "multiplicative: 2·1000 + 3·100 + 4·10 + 5")
+
+
+def LV(*pairs):
+    """Letter values, e.g. LV("͵Β", 2000, ...)."""
+    v = ", ".join(f"{c} {n}" for c, n in zip(pairs[::2], pairs[1::2]))
+    return L("Buchstabenwerte: " + v, "literaj valoroj: " + v, "letter values: " + v)
+
+
+NUMERALS = [
+    ("latn", "2345", L("Lateinisch", "latina", "Latin"), D10, None),
+    ("fullwide", digits(0xFF10), L("Vollbreit", "plenlarĝa", "Full-width"), D10, None),
+    ("arab", digits(0x0660), L("Arabisch", "araba", "Arabic"), D10, "NotoSansArabic"),
+    ("pers", digits(0x06F0), L("Persisch", "persa", "Persian"), D10, "NotoSansArabic"),
+    ("deva", digits(0x0966), L("Devanagari", "devanagara", "Devanagari"), D10, "NotoSansDevanagari"),
+    ("beng", digits(0x09E6), L("Bengalisch", "bengala", "Bengali"), D10, "NotoSansBengali"),
+    ("guru", digits(0x0A66), L("Gurmukhi", "gurmuka", "Gurmukhi"), D10, "NotoSansGurmukhi"),
+    ("gujr", digits(0x0AE6), L("Gujarati", "guĝarata", "Gujarati"), D10, "NotoSansGujarati"),
+    ("orya", digits(0x0B66), L("Oriya", "orija", "Odia"), D10, "NotoSansOriya"),
+    ("taml", digits(0x0BE6), L("Tamil", "tamila", "Tamil"), D10, "NotoSansTamil"),
+    ("telu", digits(0x0C66), L("Telugu", "telugua", "Telugu"), D10, "NotoSansTelugu"),
+    ("knda", digits(0x0CE6), L("Kannada", "kanara", "Kannada"), D10, "NotoSansKannada"),
+    ("mlym", digits(0x0D66), L("Malayalam", "malajala", "Malayalam"), D10, "NotoSansMalayalam"),
+    ("sinh", digits(0x0DE6), L("Sinhala", "sinhala", "Sinhala"), D10, "NotoSansSinhala"),
+    ("thai", digits(0x0E50), L("Thai", "taja", "Thai"), D10, "NotoSansThai"),
+    ("laoo", digits(0x0ED0), L("Lao", "laosa", "Lao"), D10, "NotoSansLao"),
+    ("tibt", digits(0x0F20), L("Tibetisch", "tibeta", "Tibetan"), D10, "NotoSerifTibetan"),
+    ("mymr", digits(0x1040), L("Birmanisch", "birma", "Burmese"), D10, "NotoSansMyanmar"),
+    ("khmr", digits(0x17E0), L("Khmer", "kmera", "Khmer"), D10, "NotoSansKhmer"),
+    ("mong", digits(0x1810), L("Mongolisch", "mongola", "Mongolian"), D10, "NotoSansMongolian"),
+    ("nkoo", digits(0x07C0), L("N’Ko", "nkoa", "N’Ko"), D10, "NotoSansNKo"),
+    ("osma", digits(0x104A0), L("Osmanya", "osmanja", "Osmanya"), D10, "NotoSansOsmanya"),
+    ("java", digits(0xA9D0), L("Javanisch", "java", "Javanese"), D10, "NotoSansJavanese"),
+    ("bali", digits(0x1B50), L("Balinesisch", "balia", "Balinese"), D10, "NotoSansBalinese"),
+    ("olck", digits(0x1C50), L("Ol Chiki", "olĉiki", "Ol Chiki"), D10, "NotoSansOlChiki"),
+    ("vaii", digits(0xA620), L("Vai", "vaja", "Vai"), D10, "NotoSansVai"),
+    ("rohg", digits(0x10D30), L("Rohingya", "rohinga", "Rohingya"), D10, "NotoSansHanifiRohingya"),
+    ("adlm", digits(0x1E950), L("Adlam", "adlama", "Adlam"), D10, "NotoSansAdlam"),
+    ("wcho", digits(0x1E2F0), L("Wancho", "vanĉa", "Wancho"), D10, "NotoSansWancho"),
+    ("hmng", digits(0x16B50), L("Pahawh Hmong", "pahaŭa hmonga", "Pahawh Hmong"), D10, "NotoSansPahawhHmong"),
+    ("cakm", digits(0x11136), L("Chakma", "ĉakma", "Chakma"), D10, "NotoSansChakma"),
+    ("roman", "MMCCCXLV", L("Römisch", "romia", "Roman"), ADD, None),
+    ("romanf", "ⅯⅯⅭⅭⅭⅩⅬⅤ", L("Röm. Zeichen", "romaj signoj", "Roman forms"),
+     L("eigene Zahlzeichen U+2160 ff., additiv", "propraj nombrosignoj U+2160 ff., aldone", "own number forms U+2160 ff., additive"), None),
+    ("hans", "二千三百四十五", L("Chinesisch", "ĉina", "Chinese"), MUL, None),
+    ("hanfin", "贰仟叁佰肆拾伍", L("Finanz-Han", "financa ĉina", "Financial Han"),
+     L("fälschungssichere Finanzzeichen, multiplikativ", "kontraŭfalsaj financaj signoj, multiplika", "tamper-proof financial forms, multiplicative"), None),
+    ("grek", "͵ΒΤΜΕ´", L("Griechisch", "greka", "Greek"), LV("͵Β", 2000, "Τ", 300, "Μ", 40, "Ε", 5), "NotoSans"),
+    ("cyrl", "҂втм҃є", L("Kyrillisch", "cirila", "Cyrillic"), LV("҂в", 2000, "т", 300, "м", 40, "є", 5), "NotoSans"),
+    ("hebr", "ב׳שמ״ה", L("Hebräisch", "hebrea", "Hebrew"), LV("ב׳", 2000, "ש", 300, "מ", 40, "ה", 5), "NotoSansHebrew"),
+    ("armn", "ՍՅԽԵ", L("Armenisch", "armena", "Armenian"), LV("Ս", 2000, "Յ", 300, "Խ", 40, "Ե", 5), "NotoSansArmenian"),
+    ("geor", "ჩტმე", L("Georgisch", "kartvela", "Georgian"), LV("ჩ", 2000, "ტ", 300, "მ", 40, "ე", 5), "NotoSansGeorgian"),
+    ("ethi", "፳፫፻፵፭", L("Äthiopisch", "etiopa", "Ethiopic"),
+     L("Hunderter: (20 + 3)·100 + 40 + 5", "centoj: (20 + 3)·100 + 40 + 5", "hundreds: (20 + 3)·100 + 40 + 5"), "NotoSansEthiopic"),
+    ("aegean", "\U00010123\U0001011b\U00010113\U0001010b", L("Ägäisch", "egea", "Aegean"), ADD, "NotoSansLinearB"),
+    ("mero", "\U000109dc\U000109d4\U000109cc\U000109c4", L("Meroitisch", "meroea", "Meroitic"), ADD, "NotoSansMeroitic"),
+    ("osiyaq", "\U0001ed1d\U0001ed15\U0001ed0d\U0001ed05", L("Siyaq osman.", "sijako otoma", "Ottoman Siyaq"), ADD, "NotoSerifOttomanSiyaq"),
+    ("isiyaq", "\U0001ec8d\U0001ec85\U0001ec7d\U0001ec75", L("Siyaq ind.", "sijako hinda", "Indic Siyaq"), ADD, "NotoSansIndicSiyaqNumbers"),
+    ("maya", digits(0x1D2E0, base=20), L("Maya", "maja", "Maya"), B20, "NotoSansMayanNumerals"),
+    ("kakt", digits(0x1D2C0, base=20), L("Kaktovik", "kaktovika", "Kaktovik"), B20, "InupiaqNumbers"),
+    ("medf", digits(0x16E80, base=20), L("Medefaidrin", "medefajdrina", "Medefaidrin"), B20, "NotoSansMedefaidrin"),
+]
+
+# Single number-like signs read as values: (asset key, text, value, name, font)
+NUMBER_SIGNS = [
+    ("s-half", "½", "1/2", L("Bruchzeichen", "frakcisigno", "vulgar fraction"), None),
+    ("s-78", "⅞", "7/8", L("Bruchzeichen", "frakcisigno", "vulgar fraction"), None),
+    ("s-slash", "3⁄4", "3/4", L("Bruchstrich U+2044", "frakcistreko U+2044", "fraction slash U+2044"), None),
+    ("s-r12", "Ⅻ", "12", L("römisches Zahlzeichen", "romia nombrosigno", "Roman number form"), None),
+    ("s-r12l", "ⅻ", "12", L("römisch, klein", "romia, minuskla", "Roman, small"), None),
+    ("s-circ12", "⑫", "12", L("eingekreist", "rondigita", "circled"), None),
+    ("s-par20", "⒇", "20", L("geklammert", "krampita", "parenthesized"), None),
+    ("s-neg10", "❿", "10", L("negativ eingekreist", "negative rondigita", "negative circled"), None),
+    ("s-cjk10", "㊉", "10", L("CJK eingekreist", "CJK rondigita", "CJK circled"), None),
+    ("s-sup", "²³⁴⁵", "2345", L("hochgestellt", "supra", "superscript"), None),
+    ("s-sub", "₂₃₄₅", "2345", L("tiefgestellt", "malsupra", "subscript"), None),
+    ("s-mbold", "\U0001d7d0\U0001d7d1\U0001d7d2\U0001d7d3", "2345", L("mathematisch fett", "matematika grasa", "mathematical bold"), "NotoSansMath"),
+    ("s-cun23", "\U0001245b", "2/3", L("Keilschrift-Bruch", "kojnoskriba frakcio", "cuneiform fraction"), "NotoSansCuneiform"),
+    ("s-cun216k", "\U00012432", "216000", L("Keilschrift, 60³", "kojnoskribo, 60³", "cuneiform, 60³"), "NotoSansCuneiform"),
+    ("s-nind", "꠰", "1/4", L("nordindisches Viertel", "nordhinda kvarono", "North Indic quarter"), None),
+    ("s-khar", "\U00010a48", "1/2", L("Kharoshthi-Hälfte", "ĥaroŝtia duono", "Kharoshthi half"), "NotoSansKharoshthi"),
+    ("s-aeg", "\U00010133", "90000", L("ägäisch", "egea", "Aegean"), "NotoSansLinearB"),
+    ("s-att", "\U00010147", "50000", L("attisch-akrophon", "atika akrofona", "Attic acrophonic"), "NotoSansSymbols2"),
+    ("s-suz", "〸", "10", L("Suzhou-Zehn", "suĝoŭa dek", "Suzhou ten"), None),
+    ("s-tam", "௲", "1000", L("Tamil-Tausend", "tamila mil", "Tamil thousand"), "NotoSansTamil"),
+    ("s-eth", "፻", "100", L("äthiopisch Hundert", "etiopa cent", "Ethiopic hundred"), "NotoSansEthiopic"),
+    ("s-hmng", "\U00016b5b", "10", L("Pahawh-Zehner", "pahaŭa deko", "Pahawh tens"), "NotoSansPahawhHmong"),
+    ("s-maya", "\U0001d2e1\U0001d2e0", "20", L("Maya-Spalte 1;0", "maja kolono 1;0", "Maya column 1;0"), "NotoSansMayanNumerals"),
+]
+
+# Credits (slide 0). Roles: OmegaT release/readme.txt, contributors: release/contributors.txt
+# (both upstream master, 2026-08-04, 6d79ee8db).
+PM = L("Projektmanager", "projektestro", "project manager")
+LEAD = L("Lead-Entwickler", "ĉefprogramisto", "lead developer")
+DOCM = L("Doku-Manager", "dokumentada estro", "documentation manager")
+FB = L("Community Facebook", "komunumo Facebook", "Facebook community")
+CREDITS = {
+    "title": L("Danke", "Dankon", "Thank you"),
+    "maint_head": L("Maintainer", "Prizorgantoj", "Maintainers"),
+    "maintainers": [
+        ("Jean-Christophe Helary", PM),
+        ("Hiroshi Miura", L("Lead-Entwickler und Produktintegration", "ĉefprogramisto kaj produkta integrado",
+                            "lead developer and product integration manager")),
+    ],
+    "past_head": L("Frühere Maintainer und Team", "Antaŭaj prizorgantoj kaj teamo", "Previous maintainers and team"),
+    "past": [
+        ("Keith Godfrey", L("Urheber von OmegaT", "kreinto de OmegaT", "original author")),
+        ("Didier Briel", PM), ("Aaron Madlon-Kay", PM),
+        ("Maxym Mykhalchuk", LEAD), ("Alex Buloichik", LEAD),
+        ("Henry Pijffers", L("Release-Manager", "eldona estro", "release manager")),
+        ("Marc Prior", L("Koordination, Webmaster", "kunordigo, retestro", "co-ordinator, webmaster")),
+        ("Vincent Bidaux", DOCM), ("Vito Smolej", DOCM),
+        ("Anthony Baldwin", L("Lokalisierung", "lokaligo", "localisation manager")),
+        ("Sabine Cretella", None), ("Dmitri Gabinski", None), ("Samuel Murray", None),
+    ],
+    "team_head": L("Aktuelles Team", "Nuna teamo", "Current team"),
+    "team": [
+        ("Kos Ivantsov", L("Lokalisierung, Nutzergruppe", "lokaligo, uzantgrupo", "localisation, user group")),
+        ("Philippe Tourigny", DOCM),
+        ("Briac Pilpré", L("Webmaster", "retestro", "webmaster")),
+        ("Marco Cevoli", L("Community Telegram", "komunumo Telegram", "Telegram community")),
+        ("Concepción Martin", FB), ("Lucie Vecerova", FB),
+    ],
+    "contrib_head": L("Code-Beitragende", "Kodkontribuantoj", "Code contributors"),
+    "contributors": ["Lev Abashkin", "Zoltan Bartko", "Volker Berlin", "Vincent Bidaux", "Stéphane Bonhomme", "Didier Briel", "Kim Bruning", "Alex Buloichik", "Vladimir Bychkov", "Sandra Jean Chua", "Thomas Cordonnier", "Martin Dufour", "Enrique Estévez Fernández", "Martin Fleurke", "Wildrich Fourie", "Dmitri Gabinski", "Keith Godfrey", "Tony Graham", "Phillip Hall", "Jean-Christophe Helary", "Chihiro Hio", "Eric Hsieh", "Thomas Huriaux", "Marc Riera Irigoyen", "Chiaki Ishikawa", "Hans-Peter Jacobs", "Kyle Katarn", "Piotr Kulik", "Guido Leenders", "Aaron Madlon-Kay", "Fabián Mandelbaum", "Manfred Martin", "Adiel Mittmann", "Hiroshi Miura", "John Moran", "Maxym Mykhalchuk", "Suguru Oho", "Arno Peters", "Henry Pijffers", "Briac Pilpré", "Nick Pizzigati", "Marc Prior", "Damien Rembert", "Tiago Saboga", "Andrzej Sawuła", "Benjamin Siband", "Vito Smolej", "Kerry Swatridge", "Yu Tang", "Philippe Tourigny", "Rashid Umarov", "Kevin Brubeck Unhammer", "Ibai Lakunza Velasco", "Antonio Vilei", "Ilia Vinogradov", "Martin Wunderlich", "Michael Zakharov"],
+    "rest": L("… und allen Mitgliedern, Übersetzenden, Testenden, Melder:innen von Fehlern und allen anderen Beteiligten – „and many, many more very helpful people“.",
+              "… kaj al ĉiuj membroj, tradukantoj, testantoj, raportantoj de eraroj kaj ĉiuj aliaj partoprenantoj – „and many, many more very helpful people“.",
+              "… and to all members, translators, testers, bug reporters and everyone else involved – “and many, many more very helpful people”."),
+    "feedback": L("Danke für euer Feedback – viele dieser Beiträge gehen auf Rückmeldungen aus der Praxis zurück. Bitte nutzt weiter Tickets, Kommentare und das Wiki auf SourceForge:",
+                  "Dankon pro viaj reagoj – multaj el ĉi tiuj kontribuoj devenas de praktikaj rimarkoj. Bonvolu plu uzi biletojn, komentojn kaj la vikion ĉe SourceForge:",
+                  "Thanks for your feedback – much of this work began with your reports. Please keep using tickets, comments and the wiki on SourceForge:"),
+    "sf_links": [
+        (L("Fehler melden", "raporti eraron", "Report a bug"), "https://sourceforge.net/p/omegat/bugs/"),
+        (L("Wünsche", "deziroj", "Feature requests"), "https://sourceforge.net/p/omegat/feature-requests/"),
+        (L("Wiki", "Vikio", "Wiki"), "https://sourceforge.net/p/omegat/wiki/Home/"),
+    ],
+    "doc_head": L("Dokumentation:", "Dokumentaro:", "Documentation:"),
+    "doc_links": [
+        (L("Handbuch", "manlibro (angle)", "User manual"),
+         L("https://omegat.sourceforge.io/manual-latest/de/", "https://omegat.sourceforge.io/manual-latest/en/",
+           "https://omegat.sourceforge.io/manual-latest/en/")),
+        (L("Dokumentation", "dokumentaro", "Documentation"), "https://omegat.org/documentation"),
+        (L("Hilfe", "helpo", "Support"), "https://omegat.org/support"),
+        (L("omegat.org", "omegat.org", "omegat.org"), "https://omegat.org/"),
+    ],
+    "sponsor": L("Danke an meinen Arbeitgeber, meine Kollegen und Chefs bei Zollsoft, dass ich mit Ωt machen sollte – und durfte –, was ich wollte.",
+                 "Dankon al mia dunganto, miaj kolegoj kaj estroj ĉe Zollsoft, ke mi kaj devis kaj rajtis fari Ωt-rilate, kion mi volis.",
+                 "Thanks to my employer, my colleagues and bosses at Zollsoft for letting me – and asking me to – do whatever I wanted with Ωt."),
+}
+
 SLIDES = [
+    {"type": "credits"},
     {"type": "overview", "pages": {"A": "2–7", "B": "8–14", "C": "15–17", "D": "18–19", "E": "20–22", "F": "23–25"}},
     {"type": "dense", "block": "A"},
     {"type": "pair", "block": "A",
@@ -419,7 +586,11 @@ SLIDES = [
      "take": L("Zahlen lassen sich nicht mehr versehentlich verändern – in keiner Schrift.",
                "Nombroj ne plu estas hazarde ŝanĝeblaj – en neniu skribo.",
                "Numbers can no longer be changed by accident – in any script.")},
-    {"type": "video", "block": "A", "video_w": 770,
+    {"type": "video", "block": "A", "video_w": 420, "video_aspect": 1280 / 804, "numerals": NUMERALS, "number_signs": NUMBER_SIGNS,
+     "numerals_head": L("2345 in 48 Schreibweisen – jede liest OmegaT als Wert 2345 (geprüft mit dem Zahlenparser): Ziffern aller Schriften, Zahlbuchstaben, ägäische, meroitische und Siyaq-Zeichen, Basis 20 bei Maya, Kaktovik und Medefaidrin.",
+                        "2345 en 48 skribmanieroj – OmegaT legas ĉiun kiel valoron 2345 (kontrolite per la nombroanalizilo): ciferoj de ĉiuj skriboj, nombroliteroj, egeaj, meroeaj kaj sijakaj signoj, bazo 20 ĉe maja, kaktovika kaj medefajdrina.",
+                        "2345 in 48 notations – OmegaT reads each one as the value 2345 (checked with the numeral parser): digits of every script, letter numerals, Aegean, Meroitic and Siyaq signs, base 20 for Maya, Kaktovik and Medefaidrin."),
+     "signs_head": L("Auch Einzelzeichen werden gelesen:", "Ankaŭ unuopaj signoj estas legataj:", "Single signs are read as well:"),
      "clips": [(A("number-autoconvert-demo.mp4"), None,
                 L("Demo: Prüfen, Vorschau, Übernehmen (6:50 min)", "Demonstro: kontroli, antaŭrigardi, apliki (6:50 min)",
                   "Demo: scan, preview, apply (6:50 min)"))],
@@ -435,7 +606,7 @@ SLIDES = [
                   "Thousands separator, decimal mark and notation selectable, e.g. like the original.")),
                (L("Vorschau", "Antaŭrigardo", "Preview"),
                 L("15:39 → 3:39 PM, 1. → 1st – mit Konfidenz; ab einer Schwelle vorausgewählt.",
-                  "15:39 → 3:39 PM, 1. → 1st – kun konfido; ekde sojlo antaŭelektitaj.",
+                  "15:39 → 3:39 PM, 1. → 1st – kun fidindeco; ekde limvaloro antaŭelektitaj.",
                   "15:39 → 3:39 PM, 1. → 1st – with confidence; preselected above a threshold.")),
                (L("Umfang", "Amplekso", "Scope"),
                 L("Alle Dateien, aktuelle Datei oder Filter; übernommen wird nur die Auswahl (SF-794).",

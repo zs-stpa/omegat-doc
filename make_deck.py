@@ -52,7 +52,7 @@ import struct
 import sys
 
 from deck_content import (AS_OF, BLOCKS, FIGURES, FOOTER, LANGS, STATUS_TEXT, UI,
-                             BEFORE_AFTER, SLIDES)
+                             BEFORE_AFTER, CREDITS, SLIDES)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 LOGO_PATH = os.path.join(HERE, "assets", "OmegaT.svg")
@@ -520,7 +520,8 @@ def video_slide(page, total, lang, s):
     boxes = []
     if s.get("notes"):
         vw = s.get("video_w", 730)
-        boxes.append((36, top + 6, vw, H - 104 - top - 40))
+        vh = vw / s["video_aspect"] if s.get("video_aspect") else H - 104 - top - 40
+        boxes.append((36, top + 6, vw, vh))
         body.append(notes_column(36 + vw + 26, top + 24, W - 72 - vw - 26, s["notes"], lang, numbered=False))
     else:
         vw = (W - 72 - 20) / len(clips)
@@ -531,8 +532,132 @@ def video_slide(page, total, lang, s):
         body.append(box(x - 1, y - 1, w + 2, h + 2, "#ffffff", BORDER, 0))
         body.append(text(x, y + h + 22, "▶ " + cap[lang], 14, GREY))
     s["_videos"] = [(path, x, y, w, h, cap) for (x, y, w, h), (path, _, cap) in zip(boxes, clips)]
-    body.append(takeaway(s["take"][lang]))
+    if s.get("numerals"):
+        body.append(numeral_strip(boxes[0][1] + boxes[0][3] + 44, lang, s))
+    else:
+        body.append(takeaway(s["take"][lang]))
     return frame(page, total, lang, s["title"][lang], "".join(body), s["block"])
+
+
+def fit_image(path, x, y, w, h, k=None):
+    """The image scaled by k (image px to slide px), shrunk to fit the box
+    (w, h) where needed, aspect kept, centred."""
+    iw, ih = image_size(path)
+    k = min(k or float("inf"), w / iw, h / ih)
+    dw, dh = iw * k, ih * k
+    return (f'<use href="#{IMG.ref(path)}" x="{x + (w - dw) / 2:.1f}" y="{y + (h - dh) / 2:.1f}" '
+            f'width="{dw:.1f}" height="{dh:.1f}"/>')
+
+
+def label(x, y, s, size, width, fill=GREY):
+    """Centred label, squeezed to width when it would not fit."""
+    fit = f' textLength="{width:.1f}" lengthAdjust="spacingAndGlyphs"' if len(s) * size * 0.56 > width else ""
+    return (f'<text x="{x:.1f}" y="{y:.1f}" font-size="{size}" fill="{fill}" text-anchor="middle"{fit}>'
+            f'{esc(s)}</text>')
+
+
+def numeral_strip(y, lang, s):
+    """Head line, one tile per 2345 sample (rendered glyphs from assets/numerals,
+    no font needed, over the script name), then a row of single number-like
+    signs; text, value and explanation in the tooltips."""
+    num_dir = os.path.join(HERE, "assets", "numerals")
+    head, hh = para(36, y, s["numerals_head"][lang], 150, 13.5, INK, "bold")
+    out = [head]
+    nums, signs = s["numerals"], s["number_signs"]
+    cols, gap, vgap = 12, 6, 5
+    rows = -(-len(nums) // cols)
+    cw = (W - 72 - (cols - 1) * gap) / cols
+    top = y + hh - 13.5 * 1.35 + 8
+    sh = 40
+    sy = H - 46 - sh
+    th = (sy - 8 - top - (rows - 1) * vgap) / rows
+    # one scale for all glyphs: Latin "2345" fills the image area
+    k = (th - 21) / image_size(os.path.join(num_dir, "latn.webp"))[1]
+    for i, (key, txt, name, how, _font) in enumerate(nums):
+        r, c = divmod(i, cols)
+        x, ty = 36 + c * (cw + gap), top + r * (th + vgap)
+        g = (box(x, ty, cw, th, PANEL, BORDER, 6)
+             + fit_image(os.path.join(num_dir, key + ".webp"), x + 4, ty + 3, cw - 8, th - 21, k)
+             + label(x + cw / 2, ty + th - 5, name[lang], 13, cw - 6))
+        out.append(tip(g, f"{name[lang]}: {txt} – {how[lang]}"))
+    lead, lw = s["signs_head"][lang], 150
+    out.append(para(36, sy + 15, lead, 22, 13, INK, "bold")[0])
+    sx, sw = 36 + lw, (W - 36 - 36 - lw) / len(signs)
+    ks = (sh - 16) / image_size(os.path.join(num_dir, "s-mbold.webp"))[1]
+    for i, (key, txt, val, name, _font) in enumerate(signs):
+        x = sx + i * sw
+        g = (fit_image(os.path.join(num_dir, key + ".webp"), x + 2, sy, sw - 4, sh - 16, ks)
+             + label(x + sw / 2, sy + sh - 2, val, 13, sw - 4))
+        out.append(tip(g, f"{name[lang]}: {txt} = {val}"))
+    return "".join(out)
+
+
+def link_row(x, y, links, lang):
+    """Clickable link chips (open in a new tab); returns (svg, right edge)."""
+    out = []
+    for label, url in links:
+        lab = label[lang]
+        href = url[lang] if isinstance(url, dict) else url
+        w = len(lab) * 7.6 + 38
+        out.append(f'<a href="{esc(href)}" target="_blank" rel="noopener">'
+                   + tip(box(x, y, w, 28, BLUE_BG, BLUE, 14)
+                         + text(x + 14, y + 19, lab + " ↗", 14, BLUE, "bold"), href) + "</a>")
+        x += w + 10
+    return "".join(out), x - 10
+
+
+def credits_slide(page, total, lang, s):
+    """Slide 0: maintainers, previous and current team, all code contributors,
+    everyone else, and the employer."""
+    c = CREDITS
+    body = [text(36, 106, c["maint_head"][lang], 15, INK, "bold")]
+    cw = (W - 72 - 18) / 2
+    for i, (name, role) in enumerate(c["maintainers"]):
+        x = 36 + i * (cw + 18)
+        body.append(tip(box(x, 116, cw, 66, PANEL, BORDER, 8)
+                        + f'<rect x="{x:.1f}" y="116" width="5" height="66" rx="2" fill="{BLUE}"/>'
+                        + text(x + 22, 146, name, 22, BLUE, "bold") + text(x + 22, 170, role[lang], 14, GREY),
+                        f"{name} – {role[lang]}"))
+
+    def people(x, y, head, items, cols, colw):
+        out = [text(x, y, head, 15, INK, "bold")]
+        for i, (name, role) in enumerate(items):
+            r, k = divmod(i, cols)
+            ny = y + 24 + r * 20
+            line = (f'<text x="{x + k * colw:.1f}" y="{ny:.1f}" font-size="13.5" fill="{INK}">'
+                    f'<tspan font-weight="bold">{esc(name)}</tspan>'
+                    + (f'<tspan fill="{GREY}"> · {esc(role[lang])}</tspan>' if role else "") + '</text>')
+            out.append(tip(line, f"{name} – {role[lang]}" if role else name))
+        return "".join(out)
+
+    body.append(people(36, 214, c["past_head"][lang], c["past"], 3, 260))
+    body.append(people(36 + 3 * 260 + 12, 214, c["team_head"][lang], c["team"], 1, 340))
+    cy = 214 + 24 + 5 * 20 + 18
+    names = c["contributors"]
+    body.append(text(36, cy, f'{c["contrib_head"][lang]} ({len(names)})', 15, INK, "bold"))
+    lines, line = [], ""
+    for n in names:
+        part = n if not line else line + " · " + n
+        if len(part) * 13.5 * 0.5 > W - 72 and line:
+            lines.append(line)
+            line = n
+        else:
+            line = part
+    lines.append(line)
+    for i, ln in enumerate(lines):
+        body.append(text(36, cy + 22 + i * 19, ln, 13.5, GREY))
+    ry = cy + 22 + len(lines) * 19 + 8
+    body.append(para(36, ry, c["rest"][lang], 150, 14, INK)[0])
+    fy = ry + 30
+    fb, fh = para(36, fy, c["feedback"][lang], 150, 14, INK, "bold")
+    body.append(fb)
+    ly = min(fy + fh - 6, H - 92 - 28 - 10)
+    x = link_row(36, ly, c["sf_links"], lang)
+    body.append(x[0])
+    body.append(text(x[1] + 24, ly + 19, c["doc_head"][lang], 14, INK, "bold"))
+    body.append(link_row(x[1] + 24 + 7.6 * len(c["doc_head"][lang]) + 8, ly, c["doc_links"], lang)[0])
+    body.append(takeaway(c["sponsor"][lang]))
+    return frame(page, total, lang, c["title"][lang], "".join(body))
 
 
 def research_slide(page, total, lang, s):
@@ -697,15 +822,16 @@ def render(spec, page, total, lang, blocks):
         return docs_slide(page, total, lang, blocks[spec["block"]], spec["thumbs"])
     return {"image": image_slide, "pair": pair_slide, "shortcuts": shortcuts_slide,
             "config": config_slide, "pipeline": pipeline_slide, "video": video_slide,
-            "research": research_slide, "langpack": langpack_slide, "timeline": timeline_slide}[kind](page, total, lang, spec)
+            "research": research_slide, "credits": credits_slide, "langpack": langpack_slide, "timeline": timeline_slide}[kind](page, total, lang, spec)
 
 
 def build():
     blocks = {b[0]: b for b in BLOCKS}
-    total = len(SLIDES)
+    base = 0 if SLIDES[0]["type"] == "credits" else 1  # credits count as slide 0
+    total = len(SLIDES) - 1 + base
     sections = []
     for i, spec in enumerate(SLIDES):
-        page = i + 1
+        page = i + base
         svgs = "".join(render(spec, page, total, lang, blocks) for lang in LANGS)
         buttons = "".join(f'<button type="button" data-lang="{l}" lang="{l}" aria-label="{UI["lang_name"][l]}">{l.upper()}</button>'
                           for l in LANGS)
@@ -714,7 +840,7 @@ def build():
     defs = (f'<svg class="defs" aria-hidden="true" width="0" height="0" xmlns="http://www.w3.org/2000/svg">'
             f'<defs>{"".join(IMG.defs)}</defs></svg>')
     page = TEMPLATE.replace("@DEFS@", defs).replace("@SECTIONS@", "\n".join(sections)) \
-        .replace("@W@", str(W)).replace("@H@", str(H))
+        .replace("@BASE@", str(base)).replace("@W@", str(W)).replace("@H@", str(H))
     version = sys.argv[1] if len(sys.argv) > 1 else "dev"
     os.makedirs(os.path.join(HERE, "dist"), exist_ok=True)
     out = os.path.join(HERE, "dist", f"OmegaT-Beitraege-Sommer-2026-{version}.html")
@@ -760,10 +886,11 @@ TEMPLATE = """<!doctype html>
 @SECTIONS@
 <script>
   const LANGS = ['de', 'eo', 'en'];
+  const BASE = @BASE@;
   const slides = [...document.querySelectorAll('.slide')];
   let i = 0, lang = 'de';
   const m = /^#s(\\d+)(?:-(de|eo|en))?$/.exec(location.hash);
-  if (m) { i = Math.min(slides.length - 1, Math.max(0, +m[1] - 1)); if (m[2]) lang = m[2]; }
+  if (m) { i = Math.min(slides.length - 1, Math.max(0, +m[1] - BASE)); if (m[2]) lang = m[2]; }
   else { try { const l = localStorage.getItem('deck-lang'); if (LANGS.includes(l)) lang = l; } catch (e) {} }
   function render() {
     slides.forEach((s, k) => s.classList.toggle('on', k === i));
@@ -771,7 +898,7 @@ TEMPLATE = """<!doctype html>
     document.documentElement.lang = lang;
     document.querySelectorAll('video.clip').forEach(v => { v.setAttribute('aria-label', v.dataset['label' + lang[0].toUpperCase() + lang[1]]); if (!v.closest('.on')) v.pause(); });
     document.querySelectorAll('.langs button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === lang));
-    history.replaceState(null, '', '#s' + (i + 1) + '-' + lang);
+    history.replaceState(null, '', '#s' + (i + BASE) + '-' + lang);
   }
   function show(n) { i = Math.min(slides.length - 1, Math.max(0, n)); render(); }
   function setLang(l) { lang = l; try { localStorage.setItem('deck-lang', l); } catch (e) {} render(); }
@@ -788,7 +915,7 @@ TEMPLATE = """<!doctype html>
   document.addEventListener('click', e => {
     const b = e.target.closest('.langs button');
     if (b) { setLang(b.dataset.lang); return; }
-    if (e.target.closest('video')) return;
+    if (e.target.closest('video') || e.target.closest('a')) return;
     show(e.clientX < innerWidth / 3 ? i - 1 : i + 1);
   });
   render();
